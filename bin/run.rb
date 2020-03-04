@@ -19,4 +19,10 @@ require 'json'
 binding.pry
 
 
-puts "hello world"
+
+
+#save first name and last name (if applicable) 
+#to USER database
+cli.username_request
+
+
