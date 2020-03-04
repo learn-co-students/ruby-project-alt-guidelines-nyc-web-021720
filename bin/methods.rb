@@ -1,3 +1,6 @@
+require_relative '../config/environment.rb'
+require 'pry'
+
 # As a user, I want to enter in an Artist and find events in NYC by that Artist" #R
 def display_output 
     self.each_with_index
@@ -29,15 +32,15 @@ def all_nyc_venues
 end
 
 def add_to_favorites
-
+    @event.create
 end
 
 def delete_a_favorite
-
+    @event.destroy
 end
 
 def delete_all_favorites
-
+    Favorite.destroy_all
 end 
 
 # puts "3. Create a favorites list" #C
