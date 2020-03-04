@@ -16,7 +16,7 @@ end
 
 # tmresults.each do |r|
 #harry_stles = tmresults["_embedded"]["events"][4]["_embedded"]["attractions"][0]["name"] #this gets us to arry styles
-# artist_list =
+#artist_list =
 #event_list = tmresults["_embedded"]["events"]
 ##
 #i = 0
