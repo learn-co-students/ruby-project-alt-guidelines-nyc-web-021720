@@ -10,28 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_03_192831) do
-
-  create_table "artists", force: :cascade do |t|
-    t.string "name"
-    t.string "genre"
-  end
-
-  create_table "events", force: :cascade do |t|
-    t.string "artist_name"
-    t.string "venue_name"
-    t.date "event_date"
-    t.float "ticketmaster_price"
-    t.float "seatgeek_price"
-    t.float "price_difference"
-    t.integer "artist_id"
-    t.integer "venue_id"
-  end
-
-  create_table "venues", force: :cascade do |t|
-    t.string "name"
-    t.string "city"
-    t.string "state"
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end
