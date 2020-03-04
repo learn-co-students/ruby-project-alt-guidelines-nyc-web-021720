@@ -7,12 +7,8 @@ Zach doing venues
 event = tmresults["_embedded"]["events"][4]#
 
 
-<<<<<<< HEAD
 #the below code shows how to write an object to a new text file
 File.open("tmresults.txt", "w") do |file|
     file.write bigobject
 end 
-=======
 
-Test
->>>>>>> ZB_v1
