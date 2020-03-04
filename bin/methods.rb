@@ -9,9 +9,8 @@ def all_nyc_venues
 end
 
 def find_nyc_events_by_artist(artist)
-    Event.select do |event|
-        event[:artist_name] == artist
-    end
+    event = Event.find_by artist_name: artist
+    display_to_user(event)
 end
 
 def find_nyc_events_by_venue(venue)
