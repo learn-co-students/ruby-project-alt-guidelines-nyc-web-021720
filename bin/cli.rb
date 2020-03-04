@@ -53,6 +53,16 @@ class CLI
     end
 end
 
+def display_to_user(event)
+    puts
+    puts
+    puts "Artist Name: #{event.artist_name}"
+    puts "Venue: #{event.venue_name}"
+    puts
+end
+
+
+
 
 
 
