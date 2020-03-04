@@ -5,3 +5,7 @@ Zach doing venues
 
 #the below code would get you into one specific event
 event = tmresults["_embedded"]["events"][4]#
+
+
+
+Test
