@@ -15,20 +15,21 @@ class CLI
         puts "3. Find events in NYC by venue"
         puts "4. Check your favorites" #R
         puts "5. Aight, I'mma head out."
+
         input = gets.chomp.downcase
-        if input == "1"
+        if input == 1
             puts "Nice! This is what we're all about, 
             after all. What event were you thinking about?"
             price_comparison            
-        elsif input == "2" 
+        elsif input == 2 
             puts "Which artist?"
             artist = gets.chomp
             find_nyc_events_by_artist(artist)
-        elsif input == "3"
+        elsif input == 3
             puts "Which venue?"
             venue = gets.chomp 
             find_nyc_events_by_venue(venue)
-        elsif input == "4"
+        elsif input == 4
             puts "No problem! Your Favorites list 
             is the perfect way to keep track of the 
             dope events going down." 
