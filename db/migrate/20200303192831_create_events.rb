@@ -13,6 +13,9 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.float :price_difference_max
       t.integer :artist_id
       t.integer :venue_id
+      t.string :test_sg_artist
+      t.string :test_sg_venue
+      t.date :test_sg_date
       end
   end
 end
