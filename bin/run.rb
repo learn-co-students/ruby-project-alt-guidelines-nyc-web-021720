@@ -18,7 +18,7 @@ require 'json'
 #sgparse_data - JSON.parse(sgresults)
 # binding.pry
 cli = CLI.new 
-cli.main_menu
+cli.log_in
 #save first name and last name (if applicable) 
 #to USER database
 
