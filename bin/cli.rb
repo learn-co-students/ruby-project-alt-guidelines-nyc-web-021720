@@ -29,7 +29,7 @@ class CLI
         elsif input == "2" 
             puts "Which artist?"
             artist = STDIN.gets.chomp
-            find_nyc_events_by_artist(artist)
+            all_artist_names_through_events
         elsif input == "3"
             puts "Which venue?"
             venue = STDIN.gets.chomp 
