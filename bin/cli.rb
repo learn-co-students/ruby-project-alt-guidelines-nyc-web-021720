@@ -108,17 +108,10 @@ end
 
 def display_to_user(event)
     puts
-    puts "Press 1 to Favorite this event"
     puts "Artist Name: #{event.artist_name}"
     puts "Venue: #{event.venue_name}"
     puts
     puts
-    input = gets.chomp.downcase
-    if input == 1 
-     add_to_favorites
-    else 
-end
-
 end
 
 
