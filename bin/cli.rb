@@ -1,45 +1,62 @@
-require_relative '../config/environment.rb'
-
+require_relative '../config/environment'
 
 class CLI 
 
     def initialize
-
+        puts 
+        puts 
+        puts "Welcome to StubMaster, home of the immediate-friend-group-famous"
+        puts "Stubmaster Price Comparison app. Compare prices and find out about"
+        puts "all the most fire events all throughout the Big Apple!"
+        puts
     end
 
     def main_menu    
-        puts "Stubmaster Main Menu"
+        puts
+        puts "StubMaster Main Menu"
         puts "*-----------------------*"
-        puts "1. Stubmaster Price Comparison App TM" #R
-        puts "2. Find events in NYC by artist" #R
-        puts "3. Find events in NYC by venue"
+        puts "1. StubMaster Price Comparison App TM" #R
+        puts "2. Find events by artist" #R
+        puts "3. Find events by venue"
         puts "4. Check your favorites" #R
         puts "5. Aight, I'mma head out."
-        input = gets.chomp.downcase
+        puts 
+        input = STDIN.gets.chomp.downcase
         if input == "1"
-            puts "Nice! This is what we're all about, 
-            after all. What event were you thinking about?"
-            price_comparison            
+            puts
+            puts "Nice! This is what we're all about,"
+            puts "after all. Select your event from the" 
+            puts "following list:"
+            puts
+            puts
+            display_list_of_events
+            id = gets.chomp
+            event = find_event_by_id(id)        
+            # take input and return matching event
+            # index 0 is id 1 and so on and so forth                
+            display_price_comparison(event)            
         elsif input == "2" 
             puts "Which artist?"
-            artist = gets.chomp
-            find_nyc_events_by_artist(artist)
+            artist = STDIN.gets.chomp
+            find_events_by_artist(artist)
         elsif input == "3"
             puts "Which venue?"
-            venue = gets.chomp 
+            venue = STDIN.gets.chomp 
             find_nyc_events_by_venue(venue)
         elsif input == "4"
             puts "No problem! Your Favorites list 
             is the perfect way to keep track of the 
             dope events going down." 
-            return favorites_list
+            favorites_list
         elsif input == "5" 
             exit 
-        else "I don't want to break the bad news,
+        else 
+            puts "I don't want to break the bad news,
             but we didn't understand what you typed. 
-            Don't worry, we have stubby fingers too.  
-            Want to try again?"
-            gets.chomp
+            (Don't worry, we have stubby fingers too.)"
+            puts
+            puts "Want to try again?"
+            STDIN.gets.chomp
         end    
     return self.main_menu
     end
@@ -50,6 +67,7 @@ def display_to_user(event)
     puts
     puts "Artist Name: #{event.artist_name}"
     puts "Venue: #{event.venue_name}"
+    puts
     puts
 end
 
