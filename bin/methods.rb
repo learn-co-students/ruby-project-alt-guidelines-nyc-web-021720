@@ -1,34 +1,7 @@
 require_relative '../config/environment.rb'
 require 'pry'
 
-<<<<<<< HEAD
-# As a user, I want to enter in an Artist and find events in NYC by that Artist" #R
-def display_output 
-    self.each_with_index
-end
-
-def display_to_user(event)
-    puts
-    puts
-    puts "Artist Name: #{event.artist_name}"
-    puts "Venue: #{event.venue_name}"
-    puts
-    puts
-end
-
-def price_comparison
-    #return list of events with index
-    puts Events.each_with_index {|event, index| "#{index}|"}
-    #ask user for input to select an event
-    input = gets.chomp  
-    #return prices (TM/SG/DIFF)    
-    
-end
-
-def find_nyc_events_by_artist(artist)
-=======
 def find_events_by_artist(artist)
->>>>>>> finished price comparison method
     event = Event.find_by artist_name: artist
     display_to_user(event)
 end
