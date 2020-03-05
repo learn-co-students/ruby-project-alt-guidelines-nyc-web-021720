@@ -19,11 +19,6 @@ e2 = Event.create(artist_name: "Bring Me The Horizon", venue_name: "Brooklyn Ste
 e3 = Event.create(artist_name: "Senses Fail", venue_name: "Cat's Cradle", event_date: "2020-9-10", ticketmaster_price_min: 25.00, seatgeek_price_min: 23.00, price_difference_min: -2.00, ticketmaster_price_max: 35.00, seatgeek_price_max: 36.00, price_difference_max: -1.00, artist_id: 4, venue_id: 2)
 e4 = Event.create(artist_name: "Kanye West", venue_name: "Webster Hall", event_date: "2020-8-6", ticketmaster_price_min: 80.00, seatgeek_price_min: 75.00, price_difference_min: -5.00, ticketmaster_price_max: 120.00, seatgeek_price_max: 106.00, price_difference_max: -14.00, artist_id: 6, venue_id: 5)
 
-<<<<<<< HEAD:db/seeds2.rb
-
-=======
-binding.pry
->>>>>>> ne1:db/seedsmanual.rb
 
 
 
