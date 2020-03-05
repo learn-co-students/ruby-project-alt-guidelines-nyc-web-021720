@@ -70,8 +70,10 @@ def display_to_user(event)
     puts
     puts "Artist Name: #{event.artist_name}"
     puts "Venue: #{event.venue_name}"
+    puts "Date: #{event.event_date}"
+    puts ""
     puts
-    puts
+    would_you_like_to_favorite
 end
 
 
