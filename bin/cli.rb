@@ -16,20 +16,26 @@ class CLI
         puts "StubMaster Main Menu"
         puts "*-----------------------*"
         puts "1. StubMaster Price Comparison App TM" #R
-        puts "2. Find events in NYC by artist" #R
-        puts "3. Find events in NYC by venue"
+        puts "2. Find events by artist" #R
+        puts "3. Find events by venue"
         puts "4. Check your favorites" #R
         puts "5. Aight, I'mma head out."
         puts 
         input = STDIN.gets.chomp.downcase
         if input == "1"
-            puts "Nice! This is what we're all about, 
-            after all. Which event were you thinking about?"
-            price_comparison            
+            puts
+            puts "Nice! This is what we're all about,"
+            puts "after all. Select your event from the" 
+            puts "following list:"
+            puts
+            Event.all
+            puts "Which event?"
+                
+                price_comparison            
         elsif input == "2" 
             puts "Which artist?"
             artist = STDIN.gets.chomp
-            all_artist_names_through_events
+            find_events_by_artist(artist)
         elsif input == "3"
             puts "Which venue?"
             venue = STDIN.gets.chomp 
@@ -38,7 +44,7 @@ class CLI
             puts "No problem! Your Favorites list 
             is the perfect way to keep track of the 
             dope events going down." 
-            return favorites_list
+            favorites_list
         elsif input == "5" 
             exit 
         else 
@@ -64,11 +70,28 @@ end
 
 def display_price_comparison(event)
     puts
-    puts
+    puts "Event: #{event.event_name}"
     puts "Artist Name: #{event.artist_name}"
     puts "Venue: #{event.venue_name}"
-    puts ""
-    puts
+    puts 
+    if event.ticketmaster_price_min > event.seatgeek_price_min
+        puts "If you're looking for a more economical price for this event,"
+        puts "StubMaster's patented Price Comparison App recommends buying tix from"
+        puts "Ticketmaster."
+    elsif event.ticketmaster_price_min < event.seatgeek_price_min
+        puts "If you're looking for a more economical price for this event,"
+        puts "StubMaster's patented Price Comparison App recommends buying tix from"
+        puts "SeatGeek."
+    elsif event.ticketmaster_price_max > event.seatgeek_price_max
+        puts "If you're looking to ball out for this event but are the type to use coupons"
+        puts "when you go food shopping, StubMaster's patented Price"
+        puts "Comparison App recommends buying tix from SeatGeek."
+    elsif event.ticketmaster_price_max < event.seatgeek_price_max
+        puts "If you're looking to ball out for this event but are the type to use coupons"
+        puts "when you go food shopping, StubMaster's patented Price"
+        puts "Comparison App recommends buying tix from Ticketmaster."
+    puts 
+    puts    
 end
 
 

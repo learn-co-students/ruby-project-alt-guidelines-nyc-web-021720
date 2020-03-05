@@ -1,13 +1,7 @@
 require_relative '../config/environment.rb'
 require 'pry'
 
-# As a user, I want to enter in an Artist and find events in NYC by that Artist" #R
-def display_output 
-    self.each_with_index
-end    
-
-
-def find_nyc_events_by_artist(artist)
+def find_events_by_artist(artist)
     event = Event.find_by artist_name: artist
     display_to_user(event)
 end
@@ -17,10 +11,14 @@ def price_comparison_by_artist(artist)
     display_price_comparison(event)
 end
 
-def find_nyc_events_by_venue(venue)
+def price_comparison_by_event(event)
+    found_event = Event.find_by event_name: event
+    display_price_comparison(found_event)
+end
+
+def find_events_by_venue(venue)
     event = Event.find_by venue_name: venue
-    display_to_user(event)
-    
+    display_to_user(event)    
 end
 
 def all_artist_names_through_events
@@ -29,9 +27,9 @@ def all_artist_names_through_events
     end
 end
 
-def all_nyc_venues
+def find_events_by_state(state)
     Venue.select do |venue|
-        venue[:city] == "New York"
+        venue.state == state
     end
 end
 
