@@ -6,17 +6,32 @@ def display_output
     self.each_with_index
 end
 
+def display_to_user(event)
+    puts
+    puts
+    puts "Artist Name: #{event.artist_name}"
+    puts "Venue: #{event.venue_name}"
+    puts
+    puts
+end
+
 def price_comparison
     #return list of events with index
+    puts Events.each_with_index {|event, index| "#{index}|"}
     #ask user for input to select an event
-    #return prices (TM/SG/DIFF)
-    puts  Events.each_with_index {|event, index| "#{index}|"}
-    gets.chomp
+    input = gets.chomp  
+    #return prices (TM/SG/DIFF)    
+    
 end
 
 def find_nyc_events_by_artist(artist)
     event = Event.find_by artist_name: artist
     display_to_user(event)
+end
+
+def price_comparison_by_artist(artist)
+    event = Event.find_by artist_name: artist
+    display_price_comparison(event)
 end
 
 def find_nyc_events_by_venue(venue)

@@ -24,7 +24,7 @@ class CLI
         input = STDIN.gets.chomp.downcase
         if input == "1"
             puts "Nice! This is what we're all about, 
-            after all. What event were you thinking about?"
+            after all. Which event were you thinking about?"
             price_comparison            
         elsif input == "2" 
             puts "Which artist?"
@@ -59,8 +59,17 @@ def display_to_user(event)
     puts "Artist Name: #{event.artist_name}"
     puts "Venue: #{event.venue_name}"
     puts
+    puts
 end
 
+def display_price_comparison(event)
+    puts
+    puts
+    puts "Artist Name: #{event.artist_name}"
+    puts "Venue: #{event.venue_name}"
+    puts ""
+    puts
+end
 
 
 
