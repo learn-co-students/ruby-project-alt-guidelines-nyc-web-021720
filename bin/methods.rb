@@ -25,8 +25,6 @@ def find_events_by_venue(venue)
     display_to_user(event)    
 end
 
-
-
 def all_artist_names_through_events
     Event.all.each_with_index do |event, index| 
         puts "#{index + 1}. #{event.artist_name}"
@@ -59,9 +57,8 @@ end
 
 
 def display_price_comparison(event)
-    binding.pry
     puts
-    puts "Event: #{event.event_name}"
+    puts
     puts "Artist Name: #{event.artist_name}"
     puts "Venue: #{event.venue_name}"
     puts "Date: #{event.event_date}"
@@ -84,6 +81,24 @@ def display_price_comparison(event)
         puts "when you go food shopping, StubMaster's patented Price"
         puts "Comparison App recommends buying tix from Ticketmaster."
     end
+    would_you_like_to_favorite   
+end
+
+def would_you_like_to_favorite
+    puts
+    puts "Would you like to save this event to your Favorites List?"
+    puts "Let us know by typing Yes or No:"
+    puts
+    input = gets.chomp.downcase 
+    if input == yes 
+        add_to_favorites(event, @current_user)
+    else 
+        main_menu
+    end 
+end
+
+def would_you_like_to_favorite(event)
+
 end
 
 
