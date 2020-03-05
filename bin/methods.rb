@@ -1,7 +1,10 @@
-require_relative '../config/environment.rb'
+require_relative '../config/environment'
 
-# As a user, I want to enter in an Artist and find events in NYC by that Artist" #R
+#See below methods for taking the response from the API and returning values
 
+
+
+#See below users for filtering
 def all_nyc_venues
     Venue.select do |venue|
         venue[:city] == "New York"
