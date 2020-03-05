@@ -34,7 +34,7 @@ class CLI
             event = find_event_by_id(id)        
             # take input and return matching event
             # index 0 is id 1 and so on and so forth                
-            display_price_comparison(event)            
+            display_price_comparison(event)          
         elsif input == "2" 
             puts "Which artist?"
             artist = STDIN.gets.chomp
@@ -42,22 +42,25 @@ class CLI
         elsif input == "3"
             puts "Which venue?"
             venue = STDIN.gets.chomp 
-            find_nyc_events_by_venue(venue)
+            find_events_by_venue(venue)
         elsif input == "4"
             puts "No problem! Your Favorites list 
             is the perfect way to keep track of the 
             dope events going down." 
             favorites_list
         elsif input == "5" 
+            puts "Alright then -- your loss! Thanks for using StubMaster though!"
             exit 
         else 
-            puts "I don't want to break the bad news,
-            but we didn't understand what you typed. 
-            (Don't worry, we have stubby fingers too.)"
             puts
-            puts "Want to try again?"
-            STDIN.gets.chomp
-        end    
+            puts "I don't want to break the bad news,"
+            puts "but we didn't understand what you typed." 
+            puts "(Don't worry, we have stubby fingers too.)"
+            puts
+            puts "Why don't you try again?"
+            puts
+            next_option
+        end  
     return self.main_menu
     end
 end
