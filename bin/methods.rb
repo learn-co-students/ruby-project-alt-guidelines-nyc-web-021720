@@ -35,8 +35,14 @@ def price_comparison_by_artist(artist)
 end
 
 def find_nyc_events_by_venue(venue)
-    Event.select do |event|
-        event[:venue] == venue
+    event = Event.find_by venue_name: venue
+    display_to_user(event)
+    
+end
+
+def all_artist_names_through_events
+    Event.all.each_with_index do |event, index| 
+        puts "#{index + 1}. #{event.artist_name}"
     end
 end
 
