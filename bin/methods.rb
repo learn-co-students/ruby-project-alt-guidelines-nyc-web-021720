@@ -87,3 +87,15 @@ def display_price_comparison(event)
 end
 
 
+def would_you_like_to_favorite?
+    puts
+    puts "Would you like to save this event to your Favorites List?"
+    puts "Let us know by typing Yes or No:"
+    puts
+    input = gets.chomp.downcase 
+    if input == yes 
+        add_to_favorites(event, @current_user)
+    else 
+        next_option
+    end 
+end

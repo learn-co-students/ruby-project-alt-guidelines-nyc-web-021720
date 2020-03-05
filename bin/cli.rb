@@ -2,16 +2,55 @@ require_relative '../config/environment'
 
 class CLI 
 
-    def initialize
-        puts 
+    attr_accessor :current_user
+
+    def initialize(current_user = nil)
         puts 
         puts "Welcome to StubMaster, home of the immediate-friend-group-famous"
         puts "Stubmaster Price Comparison app. Compare prices and find out about"
         puts "all the most fire events all throughout the Big Apple!"
         puts
     end
+    
+    def log_in
+        flag = 0
+        until flag == 1
+        puts "Please enter your username."
+        puts "Press 1 to create a username."
+        puts 
+        input = gets.chomp.downcase
+            if input == "1" 
+                 create_username
+                 flag = 1
+            elsif User.find_by username: input 
+                @current_user = input
+                flag = 1
+                main_menu
+            elsif input == "exit"
+                exit
+            else
+                puts
+                puts "This is an invalid response"
+                puts
+            end      
+        end
+    end
 
-    def main_menu    
+    def create_username
+        puts "Please enter your first name:"
+        first_name = gets.chomp
+        puts "Please enter your last name:"
+        last_name = gets.chomp
+        puts "Please enter your new username:"
+        username = gets.chomp
+        User.create(:first_name => first_name, :last_name=> last_name, :username => username)
+        puts "Thanks! Your username is #{username}"
+        log_in
+    end
+
+
+
+    def main_menu   
         puts
         puts "StubMaster Main Menu"
         puts "*-----------------------*"
@@ -50,6 +89,8 @@ class CLI
             favorites_list
         elsif input == "5" 
             exit 
+        elsif input == "exit" 
+            exit 
         else 
             puts "I don't want to break the bad news,
             but we didn't understand what you typed. 
@@ -64,11 +105,17 @@ end
 
 def display_to_user(event)
     puts
-    puts
+    puts "Press 1 to Favorite this event"
     puts "Artist Name: #{event.artist_name}"
     puts "Venue: #{event.venue_name}"
     puts
     puts
+    input = gets.chomp.downcase
+    if input == 1 
+     add_to_favorites
+    else 
+end
+
 end
 
 
