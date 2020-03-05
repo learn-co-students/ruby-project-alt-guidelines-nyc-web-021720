@@ -16,6 +16,7 @@ require 'json'
 #tmparse_data = JSON.parse(tmresults)
 #sgresults = RESTClient.get("https://api.seatgeek.com/2/events?client_id=MjA5MTgwMjd8MTU4Mjc1NzEwNy4yNw")
 #sgparse_data - JSON.parse(sgresults)
+# binding.pry
 cli = CLI.new 
 cli.main_menu
 #save first name and last name (if applicable) 

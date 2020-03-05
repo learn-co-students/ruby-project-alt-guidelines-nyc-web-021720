@@ -28,10 +28,13 @@ class CLI
             puts "after all. Select your event from the" 
             puts "following list:"
             puts
-            Event.all
-            puts "Which event?"
-                
-                price_comparison            
+            puts
+            display_list_of_events
+            id = gets.chomp
+            event = find_event_by_id(id)        
+            # take input and return matching event
+            # index 0 is id 1 and so on and so forth                
+            display_price_comparison(event)            
         elsif input == "2" 
             puts "Which artist?"
             artist = STDIN.gets.chomp
@@ -68,31 +71,6 @@ def display_to_user(event)
     puts
 end
 
-def display_price_comparison(event)
-    puts
-    puts "Event: #{event.event_name}"
-    puts "Artist Name: #{event.artist_name}"
-    puts "Venue: #{event.venue_name}"
-    puts 
-    if event.ticketmaster_price_min > event.seatgeek_price_min
-        puts "If you're looking for a more economical price for this event,"
-        puts "StubMaster's patented Price Comparison App recommends buying tix from"
-        puts "Ticketmaster."
-    elsif event.ticketmaster_price_min < event.seatgeek_price_min
-        puts "If you're looking for a more economical price for this event,"
-        puts "StubMaster's patented Price Comparison App recommends buying tix from"
-        puts "SeatGeek."
-    elsif event.ticketmaster_price_max > event.seatgeek_price_max
-        puts "If you're looking to ball out for this event but are the type to use coupons"
-        puts "when you go food shopping, StubMaster's patented Price"
-        puts "Comparison App recommends buying tix from SeatGeek."
-    elsif event.ticketmaster_price_max < event.seatgeek_price_max
-        puts "If you're looking to ball out for this event but are the type to use coupons"
-        puts "when you go food shopping, StubMaster's patented Price"
-        puts "Comparison App recommends buying tix from Ticketmaster."
-    puts 
-    puts    
-end
 
 
 
