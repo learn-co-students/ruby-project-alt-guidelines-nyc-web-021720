@@ -7,4 +7,3 @@ class Team < ActiveRecord::Base
   has_many :home_teams, through: :away_games 
 
 end
-
