@@ -64,53 +64,77 @@ def display_price_comparison(event)
     puts "Date: #{event.event_date}"
     puts
     puts 
-    if event.ticketmaster_price_min > event.seatgeek_price_min
-        puts "If you're looking for a more economical price for this event,"
-        puts "StubMaster's patented Price Comparison App recommends buying tix from"
-        puts "Ticketmaster."
-    elsif event.ticketmaster_price_min < event.seatgeek_price_min
+    flag = 0
+    until flag == 1
+  begin
+    case
+    when event.ticketmaster_price_min > event.seatgeek_price_min && event.ticketmaster_price_max > event.seatgeek_price_max
         puts "If you're looking for a more economical price for this event,"
         puts "StubMaster's patented Price Comparison App recommends buying tix from"
         puts "SeatGeek."
-    elsif event.ticketmaster_price_max > event.seatgeek_price_max
+        puts 
         puts "If you're looking to ball out for this event but are the type to use coupons"
         puts "when you go food shopping, StubMaster's patented Price"
         puts "Comparison App recommends buying tix from SeatGeek."
-    elsif event.ticketmaster_price_max < event.seatgeek_price_max
+        flag = 1
+    when event.ticketmaster_price_min > event.seatgeek_price_min && event.ticketmaster_price_max < event.seatgeek_price_max
+        puts "If you're looking for a more economical price for this event,"
+        puts "StubMaster's patented Price Comparison App recommends buying tix from"
+        puts "SeatGeek."
+        puts
         puts "If you're looking to ball out for this event but are the type to use coupons"
         puts "when you go food shopping, StubMaster's patented Price"
         puts "Comparison App recommends buying tix from Ticketmaster."
+        flag = 1
+    when event.ticketmaster_price_min < event.seatgeek_price_min && event.ticketmaster_price_max < event.seatgeek_price_max
+        puts "If you're looking for a more economical price for this event,"
+        puts "StubMaster's patented Price Comparison App recommends buying tix from"
+        puts "TicketMaster."
+        puts
+        puts "If you're looking to ball out for this event but are the type to use coupons"
+        puts "when you go food shopping, StubMaster's patented Price"
+        puts "Comparison App recommends buying tix from Ticketmaster."
+        flag = 1
+    when event.ticketmaster_price_min < event.seatgeek_price_min && event.ticketmaster_price_max > event.seatgeek_price_max
+        puts "If you're looking for a more economical price for this event,"
+        puts "StubMaster's patented Price Comparison App recommends buying tix from"
+        puts "TicketMaster."
+        puts
+        puts "If you're looking to ball out for this event but are the type to use coupons"
+        puts "when you go food shopping, StubMaster's patented Price"
+        puts "Comparison App recommends buying tix from SeatGeek."
+        flag = 1
     end
-    would_you_like_to_favorite   
+  rescue
+    puts "You entered an incorrect value, please put in something else"
+    id = gets.chomp
+    event = find_event_by_id(id)
+    display_price_comparison(event)
+    flag = 0
+  end
+  end
+
+    would_you_like_to_favorite(event)
 end
 
-def would_you_like_to_favorite
+
+def would_you_like_to_favorite(event)
     puts
     puts "Would you like to save this event to your Favorites List?"
     puts "Let us know by typing Yes or No:"
     puts
     input = gets.chomp.downcase 
-    if input == yes 
-        add_to_favorites(event, @current_user)
+    if input == "yes" 
+        add_to_favorites(event, current_user)
     else 
         main_menu
     end 
 end
 
-def would_you_like_to_favorite(event)
 
-end
-
-
-def would_you_like_to_favorite?
-    puts
-    puts "Would you like to save this event to your Favorites List?"
-    puts "Let us know by typing Yes or No:"
-    puts
-    input = gets.chomp.downcase 
-    if input == yes 
-        add_to_favorites(event, @current_user)
-    else 
-        next_option
-    end 
+def add_to_favorites(event, current_user)
+    userobj = User.find_by username: current_user
+    #eventobj = Event.find_by event_name: event
+    #eventobj = Event.find_by event_name: event
+    Favorite.create(:username => current_user, :event_name => event.event_name, :user_id => userobj.id, :event_id => event.id)
 end

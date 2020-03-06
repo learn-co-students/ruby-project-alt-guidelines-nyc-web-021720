@@ -148,7 +148,7 @@ end
 
 
 
-#create_events_artists_and_venues(tmdata)
+create_events_artists_and_venues(tmdata)
 
 map_sg_data_to_events(sgdata)
 

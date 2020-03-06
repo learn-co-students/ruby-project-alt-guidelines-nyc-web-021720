@@ -30,11 +30,14 @@ ActiveRecord::Schema.define(version: 2020_03_04_155022) do
     t.float "price_difference_max"
     t.integer "artist_id"
     t.integer "venue_id"
+    t.string "test_sg_artist"
+    t.string "test_sg_venue"
+    t.date "test_sg_date"
   end
 
   create_table "favorites", force: :cascade do |t|
     t.string "username"
-    t.string "event"
+    t.string "event_name"
     t.integer "user_id"
     t.integer "event_id"
   end

@@ -2,7 +2,7 @@ require_relative '../config/environment'
 
 class CLI 
 
-    attr_accessor :current_user
+    attr_accessor :current_user, :event
 
     def initialize(current_user = nil)
         puts 
@@ -18,7 +18,7 @@ class CLI
         puts "Please enter your username."
         puts "Press 1 to create a username."
         puts 
-        input = gets.chomp.downcase
+        input = gets.chomp
             if input == "1" 
                  create_username
                  flag = 1
@@ -44,7 +44,9 @@ class CLI
         puts "Please enter your new username:"
         username = gets.chomp
         User.create(:first_name => first_name, :last_name=> last_name, :username => username)
+        puts
         puts "Thanks! Your username is #{username}"
+        puts
         log_in
     end
 
@@ -86,7 +88,7 @@ class CLI
             puts "No problem! Your Favorites list 
             is the perfect way to keep track of the 
             dope events going down." 
-            favorites_list
+            display_favorites(current_user)
         elsif input == "5" 
             puts "Alright then -- your loss! Thanks for using StubMaster though!"
             exit 
@@ -114,8 +116,25 @@ def display_to_user(event)
     puts
 end
 
+def display_favorites(current_user)
+    favs = find_favorites_by_user(current_user)
+    favs.each_with_index do |fav, index|
+        event_id = fav.event_id 
+        event = Event.find(event_id) 
+    puts
+    puts "Artist Name: #{event.artist_name}"
+    puts "Venue: #{event.venue_name}"
+    puts
+    end
+end
 
 
+def find_favorites_by_user(current_user)
+    userobj = User.find_by username: current_user 
+    Favorite.select do |favorites|
+        favorites.user_id == userobj.id
+    end
+end
 
 
 
