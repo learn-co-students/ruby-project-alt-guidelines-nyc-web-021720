@@ -108,6 +108,7 @@ class CLI
     end
 end
 
+
 def display_to_user(event)
     puts
     puts "Artist Name: #{event.artist_name}"
@@ -115,28 +116,108 @@ def display_to_user(event)
     puts "Date: #{event.event_date}"
     puts ""
     puts
-    would_you_like_to_favorite
+    would_you_like_to_favorite(event)
 end
+
+def display_price_comparison(event)
+    puts
+    puts
+    puts "Artist Name: #{event.artist_name}"
+    puts "Venue: #{event.venue_name}"
+    puts "Date: #{event.event_date}"
+    puts
+    puts 
+    flag = 0
+    until flag == 1
+  begin
+    case
+    when event.ticketmaster_price_min > event.seatgeek_price_min && event.ticketmaster_price_max > event.seatgeek_price_max
+        puts "If you're looking for a more economical price for this event,"
+        puts "StubMaster's patented Price Comparison App recommends buying tix from"
+        puts "SeatGeek."
+        puts 
+        puts "If you're looking to ball out for this event but are the type to use coupons"
+        puts "when you go food shopping, StubMaster's patented Price"
+        puts "Comparison App recommends buying tix from SeatGeek."
+        flag = 1
+    when event.ticketmaster_price_min > event.seatgeek_price_min && event.ticketmaster_price_max < event.seatgeek_price_max
+        puts "If you're looking for a more economical price for this event,"
+        puts "StubMaster's patented Price Comparison App recommends buying tix from"
+        puts "SeatGeek."
+        puts
+        puts "If you're looking to ball out for this event but are the type to use coupons"
+        puts "when you go food shopping, StubMaster's patented Price"
+        puts "Comparison App recommends buying tix from Ticketmaster."
+        flag = 1
+    when event.ticketmaster_price_min < event.seatgeek_price_min && event.ticketmaster_price_max < event.seatgeek_price_max
+        puts "If you're looking for a more economical price for this event,"
+        puts "StubMaster's patented Price Comparison App recommends buying tix from"
+        puts "TicketMaster."
+        puts
+        puts "If you're looking to ball out for this event but are the type to use coupons"
+        puts "when you go food shopping, StubMaster's patented Price"
+        puts "Comparison App recommends buying tix from Ticketmaster."
+        flag = 1
+    when event.ticketmaster_price_min < event.seatgeek_price_min && event.ticketmaster_price_max > event.seatgeek_price_max
+        puts "If you're looking for a more economical price for this event,"
+        puts "StubMaster's patented Price Comparison App recommends buying tix from"
+        puts "TicketMaster."
+        puts
+        puts "If you're looking to ball out for this event but are the type to use coupons"
+        puts "when you go food shopping, StubMaster's patented Price"
+        puts "Comparison App recommends buying tix from SeatGeek."
+        flag = 1
+    end
+  rescue
+    puts "You entered an incorrect value, please put in something else"
+    id = gets.chomp
+    event = find_event_by_id(id)
+    display_price_comparison(event)
+    flag = 0
+  end
+  end
+
+    would_you_like_to_favorite(event)
+end
+
 
 def display_favorites(current_user)
     favs = find_favorites_by_user(current_user)
     favs.each_with_index do |fav, index|
         event_id = fav.event_id 
         event = Event.find(event_id) 
-    puts
-    puts "Artist Name: #{event.artist_name}"
+    puts 
+    puts "#{index + 1}.Artist Name: #{event.artist_name}"
     puts "Venue: #{event.venue_name}"
     puts
     end
+    puts "If you would like to remove a favorite please type Remove."
+    puts "To return to the main menu select Main Menu"
+    input = gets.chomp.downcase
+     if input == "main menu"
+        main_menu
+     elsif  input == "remove"
+        puts "Please input the number you would like to remove."
+        input = gets.chomp
+        delete_favorite(current_user, input)
+     elsif input == "exit"
+        exit
+     else 
+        main_menu
+     end
 end
 
+# 
+#
+#
+#
+#
+#
 
-def find_favorites_by_user(current_user)
-    userobj = User.find_by username: current_user 
-    Favorite.select do |favorites|
-        favorites.user_id == userobj.id
-    end
-end
+
+
+
+
 
 
 

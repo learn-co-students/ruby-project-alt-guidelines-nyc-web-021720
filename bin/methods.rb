@@ -43,80 +43,6 @@ def display_list_of_events
     end
 end
 
-def add_to_favorites
-    @event.create
-end
-
-def delete_a_favorite
-    @event.destroy
-end
-
-def delete_all_favorites
-    Favorite.destroy_all
-end 
-
-
-def display_price_comparison(event)
-    puts
-    puts
-    puts "Artist Name: #{event.artist_name}"
-    puts "Venue: #{event.venue_name}"
-    puts "Date: #{event.event_date}"
-    puts
-    puts 
-    flag = 0
-    until flag == 1
-  begin
-    case
-    when event.ticketmaster_price_min > event.seatgeek_price_min && event.ticketmaster_price_max > event.seatgeek_price_max
-        puts "If you're looking for a more economical price for this event,"
-        puts "StubMaster's patented Price Comparison App recommends buying tix from"
-        puts "SeatGeek."
-        puts 
-        puts "If you're looking to ball out for this event but are the type to use coupons"
-        puts "when you go food shopping, StubMaster's patented Price"
-        puts "Comparison App recommends buying tix from SeatGeek."
-        flag = 1
-    when event.ticketmaster_price_min > event.seatgeek_price_min && event.ticketmaster_price_max < event.seatgeek_price_max
-        puts "If you're looking for a more economical price for this event,"
-        puts "StubMaster's patented Price Comparison App recommends buying tix from"
-        puts "SeatGeek."
-        puts
-        puts "If you're looking to ball out for this event but are the type to use coupons"
-        puts "when you go food shopping, StubMaster's patented Price"
-        puts "Comparison App recommends buying tix from Ticketmaster."
-        flag = 1
-    when event.ticketmaster_price_min < event.seatgeek_price_min && event.ticketmaster_price_max < event.seatgeek_price_max
-        puts "If you're looking for a more economical price for this event,"
-        puts "StubMaster's patented Price Comparison App recommends buying tix from"
-        puts "TicketMaster."
-        puts
-        puts "If you're looking to ball out for this event but are the type to use coupons"
-        puts "when you go food shopping, StubMaster's patented Price"
-        puts "Comparison App recommends buying tix from Ticketmaster."
-        flag = 1
-    when event.ticketmaster_price_min < event.seatgeek_price_min && event.ticketmaster_price_max > event.seatgeek_price_max
-        puts "If you're looking for a more economical price for this event,"
-        puts "StubMaster's patented Price Comparison App recommends buying tix from"
-        puts "TicketMaster."
-        puts
-        puts "If you're looking to ball out for this event but are the type to use coupons"
-        puts "when you go food shopping, StubMaster's patented Price"
-        puts "Comparison App recommends buying tix from SeatGeek."
-        flag = 1
-    end
-  rescue
-    puts "You entered an incorrect value, please put in something else"
-    id = gets.chomp
-    event = find_event_by_id(id)
-    display_price_comparison(event)
-    flag = 0
-  end
-  end
-
-    would_you_like_to_favorite(event)
-end
-
 
 def would_you_like_to_favorite(event)
     puts
@@ -134,7 +60,26 @@ end
 
 def add_to_favorites(event, current_user)
     userobj = User.find_by username: current_user
-    #eventobj = Event.find_by event_name: event
-    #eventobj = Event.find_by event_name: event
     Favorite.create(:username => current_user, :event_name => event.event_name, :user_id => userobj.id, :event_id => event.id)
 end
+
+def find_favorites_by_user(current_user)
+    userobj = User.find_by username: current_user 
+    Favorite.select do |favorites|
+        favorites.user_id == userobj.id
+    end
+end
+
+def find_one_favorite(current_user, id)
+    userobj = User.find_by username: current_user 
+    Favorite.select do |favorites|
+        favorites.user_id == userobj.id
+    end
+end
+
+def delete_favorite(current_user, number)
+    favs = find_favorites_by_user(current_user)
+    Favorite.delete(favs[number.to_i - 1]) 
+end
+
+
