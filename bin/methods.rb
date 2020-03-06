@@ -1,10 +1,37 @@
 require_relative '../config/environment.rb'
 require 'pry'
 
+def display_list_of_events
+    Event.all.each_with_index do |event, index| 
+        puts "#{index + 1}. #{event.artist_name} at #{event.venue_name} on #{event.event_date}"
+    end
+end
+
+def display_list_of_artists
+    Artist.all.each_with_index do |artist, index| 
+        puts "#{index + 1}. #{artist.name}"
+    end
+end
+
 def find_events_by_artist(artist)
-    event = Event.find_by artist_name: artist
+    artist_name = Artist.find(artist).name
+    event = Event.find_by artist_name: artist_name
     display_to_user(event)
 end
+
+
+def display_list_of_venues
+    Venue.all.each_with_index do |venue, index| 
+        puts "#{index + 1}. #{venue.name} at #{venue.city}"
+    end
+end
+
+def find_events_by_venue(venue)
+    venue_name = Venue.find(venue).name
+    event = Event.find_by venue_name: venue_name
+    display_to_user(event)    
+end
+
 
 def find_event_by_id(id)
     Event.find_by id: id
@@ -20,26 +47,9 @@ def price_comparison_by_event(event)
     display_price_comparison(found_event)
 end
 
-def find_events_by_venue(venue)
-    event = Event.find_by venue_name: venue
-    display_to_user(event)    
-end
-
 def all_artist_names_through_events
     Event.all.each_with_index do |event, index| 
         puts "#{index + 1}. #{event.artist_name}"
-    end
-end
-
-def find_events_by_state(state)
-    Venue.select do |venue|
-        venue.state == state
-    end
-end
-
-def display_list_of_events
-    Event.all.each_with_index do |event, index| 
-        puts "#{index + 1}. #{event.artist_name} at #{event.venue_name} on #{event.event_date}"
     end
 end
 

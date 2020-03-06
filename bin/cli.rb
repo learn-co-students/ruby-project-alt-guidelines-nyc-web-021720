@@ -78,12 +78,14 @@ class CLI
             display_price_comparison(event)          
         elsif input == "2" 
             puts "Which artist?"
-            artist = STDIN.gets.chomp
-            find_events_by_artist(artist)
+            display_list_of_artists
+            id = gets.chomp
+            find_events_by_artist(id)      
         elsif input == "3"
             puts "Which venue?"
-            venue = STDIN.gets.chomp 
-            find_events_by_venue(venue)
+            display_list_of_venues
+            id = gets.chomp
+            find_events_by_venue(id) 
         elsif input == "4"
             puts "No problem! Your Favorites list 
             is the perfect way to keep track of the 
@@ -110,12 +112,11 @@ end
 
 
 def display_to_user(event)
-    event.each_with_index do |fav, index|
+    puts 
     puts "Artist Name: #{event.artist_name}"
     puts "Venue: #{event.venue_name}"
     puts "Date: #{event.event_date}"
     puts
-    end
     would_you_like_to_favorite(event)
 end
 
@@ -185,7 +186,7 @@ def display_favorites(current_user)
         event_id = fav.event_id 
         event = Event.find(event_id) 
     puts 
-    puts "#{index +}.Artist Name: #{event.artist_name}"
+    puts "#{index + 1}.Artist Name: #{event.artist_name}"
     puts "Venue: #{event.venue_name}"
     puts
     end
