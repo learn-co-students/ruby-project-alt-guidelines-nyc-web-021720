@@ -110,22 +110,20 @@ end
 
 
 def display_to_user(event)
-    puts
+    event.each_with_index do |fav, index|
     puts "Artist Name: #{event.artist_name}"
     puts "Venue: #{event.venue_name}"
     puts "Date: #{event.event_date}"
-    puts ""
     puts
+    end
     would_you_like_to_favorite(event)
 end
 
 def display_price_comparison(event)
     puts
-    puts
     puts "Artist Name: #{event.artist_name}"
     puts "Venue: #{event.venue_name}"
     puts "Date: #{event.event_date}"
-    puts
     puts 
     flag = 0
     until flag == 1
@@ -187,7 +185,7 @@ def display_favorites(current_user)
         event_id = fav.event_id 
         event = Event.find(event_id) 
     puts 
-    puts "#{index + 1}.Artist Name: #{event.artist_name}"
+    puts "#{index +}.Artist Name: #{event.artist_name}"
     puts "Venue: #{event.venue_name}"
     puts
     end
