@@ -1,0 +1,14 @@
+Ticketmaster New York DMA = 345
+
+Nick is doing artists
+Zach doing venues
+
+#the below code would get you into one specific event
+event = tmresults["_embedded"]["events"][4]#
+
+
+#the below code shows how to write an object to a new text file
+File.open("tmresults.txt", "w") do |file|
+    file.write bigobject
+end 
+
